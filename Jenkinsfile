@@ -1,16 +1,28 @@
-pipeline { 
-    agent { label 'slave-1'}
+pipeline {
+    agent any
     
     tools {
         maven 'maven3'
+        jdk 'jdk17'
     }
 
     stages {
         
-        
-        stage('build') {
+        stage('Compile') {
             steps {
-               sh "mvn package"
+            sh  "mvn compile"
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                sh "mvn test"
+            }
+        }
+        
+        stage('Package') {
+            steps {
+                sh "mvn package"
             }
         }
     }
