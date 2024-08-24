@@ -13,13 +13,13 @@ spec:
         app: bloggingapp
     spec:
       containers:
-        - name: bloggingapp
-          image: adijaiswal/bloggingapp:latest # Updated image to private DockerHub image
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
+      - name: bloggingapp
+        image: mihirmodi2561/bloggingapp:latest # Updated image to private DockerHub image
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
       imagePullSecrets:
-        - name: regcred # Reference to the Docker registry secret
+      - name: regcred # Reference to the Docker registry secret
 ---
 apiVersion: v1
 kind: Service
@@ -29,7 +29,7 @@ spec:
   selector:
     app: bloggingapp
   ports:
-    - protocol: "TCP"
-      port: 80
-      targetPort: 8080 
+  - protocol: "TCP"
+    port: 80
+    targetPort: 8080
   type: LoadBalancer
