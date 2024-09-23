@@ -18,7 +18,7 @@ phases:
       - mvn package
       - echo "CHecking path"
       - pwd
-      - target\ ls -ltrh
+      - ls -ltrh ./target
       - echo "Building Docker image..."
       - docker build -t moiz/project .
       - docker tag moiz/project:latest 034362047502.dkr.ecr.us-east-1.amazonaws.com/moiz/project:latest
