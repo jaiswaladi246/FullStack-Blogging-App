@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: openjdk17  # Adjust Java version if needed
+      java: corretto17  # Adjust Java version if needed
     commands:
       - echo "Installing Maven and Docker..."
       - mvn -version
