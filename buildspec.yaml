@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto17  # Adjust Java version if needed
+      java: corretto17
     commands:
       - echo "Installing Maven and Docker..."
       - mvn -version
@@ -11,14 +11,13 @@ phases:
   pre_build:
     commands:
       - echo "Pulling dependencies from Nexus based on pom.xml..."
-      - mvn clean install -DskipTests=true  # Skip tests to speed up the process; you can enable them if required
+      - mvn clean install -DskipTests=true
   build:
     commands:
       - echo "Building the project with Maven..."
       - mvn package
-      - echo "CHecking path"
-      - pwd
-      - ls -ltrh ./target
+      - echo "Checking target directory contents:"
+      - ls -la target
       - echo "Building Docker image..."
       - docker build -t moiz/project .
       - docker tag moiz/project:latest 034362047502.dkr.ecr.us-east-1.amazonaws.com/moiz/project:latest
@@ -28,11 +27,11 @@ phases:
       - docker push 034362047502.dkr.ecr.us-east-1.amazonaws.com/moiz/project:latest
       - echo "Build completed successfully!"
 artifacts:
+  base-directory: target
   files:
-    - codebuild/output/src23905962/src/github.com/Zayan-A/FullStack-Blogging-App/target/*.jar  # Specify the exact JAR file name
+    - twitter-app-0.0.3.jar
   name: my-application-artifact.zip
   discard-paths: yes
-  base-directory: target  # The directory where your build artifacts (like JAR) are stored
 cache:
   paths:
-    - '/root/.m2/**/*'  # Cache Maven dependencies to speed up subsequent builds
+    - '/root/.m2/**/*'
