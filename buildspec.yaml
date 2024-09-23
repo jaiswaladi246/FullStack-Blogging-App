@@ -1,0 +1,35 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: openjdk17  # Adjust Java version if needed
+    commands:
+      - echo "Installing Maven and Docker..."
+      - mvn -version
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 034362047502.dkr.ecr.us-east-1.amazonaws.com
+  pre_build:
+    commands:
+      - echo "Pulling dependencies from Nexus based on pom.xml..."
+      - mvn clean install -DskipTests=true  # Skip tests to speed up the process; you can enable them if required
+  build:
+    commands:
+      - echo "Building the project with Maven..."
+      - mvn package
+      - echo "Building Docker image..."
+      - docker build -t moiz/project .
+      - docker tag moiz/project:latest 034362047502.dkr.ecr.us-east-1.amazonaws.com/moiz/project:latest
+  post_build:
+    commands:
+      - echo "Pushing Docker image to Amazon ECR..."
+      - docker push 034362047502.dkr.ecr.us-east-1.amazonaws.com/moiz/project:latest
+      - echo "Build completed successfully!"
+artifacts:
+  files:
+    - target/*.jar  # Change this based on what files you want to upload
+  name: my-application-artifact.zip
+  discard-paths: yes
+  base-directory: target  # The directory where your build artifacts (like JAR) are stored
+cache:
+  paths:
+    - '/root/.m2/**/*'  # Cache Maven dependencies to speed up subsequent builds
