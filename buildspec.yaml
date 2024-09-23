@@ -29,7 +29,7 @@ phases:
       - echo "Build completed successfully!"
 artifacts:
   files:
-    - codebuild/output/src23905962/src/github.com/Zayan-A/FullStack-Blogging-App/target/twitter-app-0.0.3.jar  # Specify the exact JAR file name
+    - codebuild/output/src23905962/src/github.com/Zayan-A/FullStack-Blogging-App/target/*.jar  # Specify the exact JAR file name
   name: my-application-artifact.zip
   discard-paths: yes
   base-directory: target  # The directory where your build artifacts (like JAR) are stored
