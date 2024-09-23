@@ -16,6 +16,8 @@ phases:
     commands:
       - echo "Building the project with Maven..."
       - mvn package
+      - echo "Contents of the target directory:"
+      - ls -la target  # List files to verify output
       - echo "Building Docker image..."
       - docker build -t moiz/project .
       - docker tag moiz/project:latest 034362047502.dkr.ecr.us-east-1.amazonaws.com/moiz/project:latest
