@@ -1,0 +1,38 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+    commands:
+      - echo "Installing Maven and Docker..."
+      - mvn -version
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 034362047502.dkr.ecr.us-east-1.amazonaws.com
+  pre_build:
+    commands:
+      - echo "Pulling dependencies from Nexus based on pom.xml..."
+      - mvn clean install -DskipTests=true
+  build:
+    commands:
+      - echo "Building the project with Maven..."
+      - mvn package
+      - echo "Checking target directory contents:"
+      - ls -la target
+      - echo "Building Docker image..."
+      - IMAGE_TAG=v1-$CODEBUILD_BUILD_NUMBER
+      - docker build -t moiz/project:$IMAGE_TAG .
+      - docker tag moiz/project:$IMAGE_TAG 034362047502.dkr.ecr.us-east-1.amazonaws.com/moiz/project:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo "Pushing Docker image to Amazon ECR..."
+      - docker push 034362047502.dkr.ecr.us-east-1.amazonaws.com/moiz/project:$IMAGE_TAG
+      - echo "Build completed successfully!"
+artifacts:
+  base-directory: target
+  files:
+    - twitter-app-0.0.3.jar
+  name: my-application-artifact.zip
+  discard-paths: yes
+cache:
+  paths:
+    - '/root/.m2/**/*'
