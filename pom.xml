@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>twitter-app</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 	<name>twitter-app</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -102,11 +102,11 @@
 	<distributionManagement>
         <repository>
             <id>maven-releases</id>
-            <url>http://13.235.245.200:8081/repository/maven-releases/</url>
+            <url>http://13.234.122.191:8081/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>maven-snapshots</id>
-            <url>http://13.235.245.200:8081/repository/maven-snapshots/</url>
+            <url>http://13.234.122.191:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
