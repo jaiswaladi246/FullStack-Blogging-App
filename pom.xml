@@ -117,12 +117,16 @@
 				</executions>
 			</plugin>
 
-			  <plugin>
+			 <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>3.2.5</version>
             <configuration>
-                <excludedGroups>junit</excludedGroups> <!-- This will exclude any JUnit tests -->
+                <providers>
+                    <provider>
+                        <name>testng</name> <!-- Force TestNG -->
+                    </provider>
+                </providers>
                 <suiteXmlFiles>
                     <suiteXmlFile>testng.xml</suiteXmlFile>
                 </suiteXmlFiles>
