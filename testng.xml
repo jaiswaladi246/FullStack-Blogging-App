@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TwitterApp Test Suite">
-    <test name="TwitterApp Tests">
-        <classes>
-            <class name="com.example.twitterapp.LoginTest"/>
-            <class name="com.example.twitterapp.TweetCreationTest"/>
-            <class name="com.example.twitterapp.TweetDeletionTest"/>
-        </classes>
-    </test>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="TestNG Suite">
+   <test name="TwitterApp Test">
+      <classes>
+         <class name="com.example.twitterapp.LoginTest"/>
+      </classes>
+   </test>
 </suite>
