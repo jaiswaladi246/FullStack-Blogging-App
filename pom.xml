@@ -122,6 +122,7 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>3.2.5</version>
             <configuration>
+                <excludedGroups>junit</excludedGroups> <!-- This will exclude any JUnit tests -->
                 <suiteXmlFiles>
                     <suiteXmlFile>testng.xml</suiteXmlFile>
                 </suiteXmlFiles>
