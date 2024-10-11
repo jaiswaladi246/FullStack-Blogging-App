@@ -6,8 +6,6 @@ ENV APP_HOME /usr/src/app
 
 WORKDIR $APP_HOME
 
-RUN ls target/*.jar
-
 COPY target/*.jar $APP_HOME/app.jar
 
 CMD ["java", "-jar", "app.jar"]
