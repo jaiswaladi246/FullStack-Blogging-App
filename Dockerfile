@@ -2,7 +2,7 @@ FROM eclipse-temurin:17-jdk-alpine as build
  
 ENV APP_HOME /usr/src/app
 
-RUN mkdir $APP_HOME
+RUN mkdir -p $APP_HOME
 
 WORKDIR $APP_HOME
 
