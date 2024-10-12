@@ -12,7 +12,7 @@ FROM gcr.io/distroless/java:17
 
 ENV APP_HOME /usr/src/app
 
-WORKDIR /app
+WORKDIR $APP_HOME
 
 COPY --from=build $APP_HOME/app.jar $APP_HOME
 
