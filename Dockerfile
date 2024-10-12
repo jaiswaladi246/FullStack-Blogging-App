@@ -8,7 +8,7 @@ WORKDIR $APP_HOME
 
 COPY target/*.jar $APP_HOME/app.jar
 
-FROM gcr.io/distroless/java:17-debian11
+FROM gcr.io/distroless/java17-debian12
 
 ENV APP_HOME /usr/src/app
 
